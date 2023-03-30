@@ -21,7 +21,7 @@ Step to use,
 - Run the quickstartKotlin app on two Android devices or emulator.
 - Press the video call button at the bottom right portion of the screen and type a room name to connect to a Room. In both device room name should be same.
 - On another device, use an additional access token with a different identity to connect to the same room.
-- The generated token have short expiry time so whenever you get `Failed to connect` error in the application then need to generate token and again and rerun the application.
+- The generated access token have short expiry time so whenever you get `Failed to connect` error in the application then need to generate token and again and rerun the application. The error indication that there is some issue facing to connect with twilio server.
 
 Further Reading
 -----------
