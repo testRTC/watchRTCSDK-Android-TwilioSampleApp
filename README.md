@@ -1,27 +1,31 @@
 # WatchRTC Twilio sample application
-This is the WatchRTC Android Twilio sample application.
+This is the WatchRTC Android Twilio sample application. The project reference from the Twilio sample application. The main purpose of this project is 'How to implement WatchRTC Android SDK with Twilio WebRTC SDK'.
 
 WatchRTC
 -----------
-WatchRTC SDK integration code will located in `` file and WatchRTC sdk init function is `` WatchRTC SDK version 1.0.0 used in this sample application.
-
-Basic Video Chat
------------
-This application provides a completed version of the OpenTok [Basic Video Chat tutorial](https://tokbox.com/developer/tutorials/android/) for Android.
-With use of this application we can have Video and Audio calls.
-
-Step to use
------------
-To use this application:
 - Generate WatchRTC_api_key and update in `WatchRTCConfig`.
-- Generate api_key, session_id, token using [tokbox account](https://tokbox.com/account/user/signup).
-- Update this these credential into `OpenTokConfig.kt` class
-- Run application into two phone and enter the same room-id in both phone and start call
-- Press back button from both phone and go to WatchRTC portal to check call stats information.
+- WatchRTC SDK integration code will located in `VideoActivity.kt` file 
+- We have used WatchRTC SDK version 1.0.0 in this sample app.
+
+Twilio Video Quickstart for Android
+-----------
+Step to use,
+- Import this project into the latest Android studio i.e. 'Electric Eel | 2022.1.1' and above
+- Generate an Access Token
+-- View instructions here for how to generate an Access Token using the [Twilio CLI](https://www.twilio.com/docs/video/tutorials/user-identity-access-tokens#generate-cli). 
+-- Generating Access Tokens with the Twilio CLI is a quick way to get an Access Token for testing and development purposes only. 
+-- Need to generate access token for each phone/emulator. 
+- Add the access token string copied from the console to a variable named 'phone1Token' & 'phone2Token' in your local.properties file.
+`phone1Token=abcde450123456789`
+`phone2Token=fghij691234563215`
+- Run the quickstartKotlin app on two Android devices or emulator.
+- Press the video call button at the bottom right portion of the screen and type a room name to connect to a Room. In both device room name should be same.
+- On another device, use an additional access token with a different identity to connect to the same room.
+- The generated token have short expiry time so whenever you get `Failed to connect` error in the application then need to generate token and again and rerun the application.
 
 Further Reading
 -----------
-- Read more about [OpenTok Android SDK](https://tokbox.com/developer/sdks/android/)
+- Read more about [Twilio sample](https://github.com/twilio/video-quickstart-android#quickstart)
 - [WatchRTC SDK](https://github.com/testRTC/watchRTCSDK-Android)
 - [WatchRTC Sample application](https://github.com/testRTC/watchRTCSDK-Android-SampleApp)
-- [WatchRTC Twilio Sample application](https://github.com/testRTC/watchRTCSDK-Android-TwilioSampleApp)
+- [WatchRTC Vonage Sample application](https://github.com/testRTC/watchRTCSDK-Android-VonageSampleApp)

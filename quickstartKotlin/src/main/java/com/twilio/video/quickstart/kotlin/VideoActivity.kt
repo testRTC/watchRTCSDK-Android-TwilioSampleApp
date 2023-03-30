@@ -52,8 +52,7 @@ class VideoActivity : AppCompatActivity() {
     /*
      * You must provide a Twilio Access Token to connect to the Video service
      */
-    private val TWILIO_ACCESS_TOKEN = BuildConfig.TWILIO_ACCESS_TOKEN
-    private val ACCESS_TOKEN_SERVER = BuildConfig.TWILIO_ACCESS_TOKEN_SERVER
+    private val ACCESS_TOKEN_SERVER = "Update access token here to get using api"
 
     /*
      * Access token used to connect. This field will be set either from the console generated token
@@ -1165,18 +1164,7 @@ class VideoActivity : AppCompatActivity() {
             Log.d("WatchRTC", "WatchRTC-getStats() called.")
             room?.getStats(object : StatsListener {
                 override fun onStats(statsReports: MutableList<StatsReport>) {
-//                    Utils.writeFile("\n" + Gson().toJson(statsReports), applicationContext)
-                    Log.d("WatchRTC", "WatchRTC-onStats() called.")
-
                     callback.onStatsAvailable(mapNewTwilioStats(statsReports))
-                    /*for (statsReport in statsReports) {
-                        try {
-                            callback.onStatsAvailable(mapTwilioStats(statsReport))
-                        } catch (e: ConnectionException) {
-                            Log.e("WatchRTC", "WatchRTC-onStats() errors,", e)
-                            e.printStackTrace()
-                        }
-                    }*/
                 }
             })
 
@@ -1209,75 +1197,6 @@ class VideoActivity : AppCompatActivity() {
             }
         }
         return RTCStatsReport(report, Date().time)
-    }
-
-    @Throws(Exception::class)
-    private fun mapTwilioStats(stats: StatsReport): com.spearline.watchrtc.model.RTCStatsReport {
-        Log.d("WatchRTC", "WatchRTC-mapTwilioStats() called.")
-        val report = HashMap<String, com.spearline.watchrtc.model.RTCStatsReport.RTCStat>()
-        val jsonStr = Gson().toJson(stats)
-        val mainJsonObject = JSONObject(jsonStr)
-        if (mainJsonObject != null) {
-            for (key in mainJsonObject.keys()) {
-                val statArray = mainJsonObject.optJSONArray(key)
-                if (statArray != null) {
-                    for (j in 0 until statArray.length()) {
-                        val statJson = statArray.optJSONObject(j)
-                        if (statJson != null) {
-                            val statProperties = HashMap<String, Any>()
-                            for (jsonKey in statJson.keys()) {
-                                if (!jsonKey.equals("timestamp")) {
-                                    statProperties[jsonKey] = statJson.get(jsonKey)
-                                }
-                            }
-
-                            var timeStamp: Long = statJson.optLong("timestamp", Date().time)
-                            if (statJson.has("timestamp")) {
-                                val dateTime = Date(timeStamp)
-                                timeStamp = dateTime.time
-                                Log.d(
-                                    "WatchRTC",
-                                    "WatchRTC-jsonTimeStamp: ${statJson.optLong("timestamp")} and timeStamp:$timeStamp"
-                                )
-                            }
-                            val watchRtcStat = RTCStatsReport.RTCStat(timeStamp, statProperties)
-                            report[key] = watchRtcStat
-                        }
-                    }
-                }
-            }
-        }
-
-        return RTCStatsReport(report, Date().time)
-    }
-
-    private fun mapStats(stats: StatsReport): com.spearline.watchrtc.model.RTCStatsReport {
-        Log.d("WatchRTC", "WatchRTC-mapStats() called.")
-        val report = HashMap<String, com.spearline.watchrtc.model.RTCStatsReport.RTCStat>()
-        val jsonStr = Gson().toJson(stats)
-        val tempJson = JSONObject(jsonStr)
-        if (tempJson.has("stats")) {
-            val statsJson = tempJson.optJSONObject("stats")
-            if (statsJson != null) {
-                for (key in statsJson.keys()) {
-
-                    val stat = statsJson.getJSONObject(key)
-                    val statProperties = HashMap<String, Any>()
-                    val membersJson = stat.getJSONObject("members")
-                    for (memberJsonKey in membersJson.keys()) {
-                        statProperties[memberJsonKey] = membersJson.get(memberJsonKey)
-                    }
-                    val watchRtcStat = com.spearline.watchrtc.model.RTCStatsReport.RTCStat(
-                        stat.getLong("timestampUs"),
-                        statProperties
-                    )
-                    report[key] = watchRtcStat
-                }
-            }
-        }
-        val reportStatus = com.spearline.watchrtc.model.RTCStatsReport(report, 0L)
-        Log.d("WatchRTC", "WatchRTC-mapStats() return ${reportStatus.toJson()}")
-        return reportStatus
     }
 
     private val peerName = getPeerId()

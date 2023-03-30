@@ -26,15 +26,7 @@ android {
         buildConfigField("String", "phone1Token", properties.getProperty("phone1Token"))
         buildConfigField("String", "phone2Token", properties.getProperty("phone2Token"))
 
-        buildConfigField("String",
-                "TWILIO_ACCESS_TOKEN",
-                "\"${getSecretProperty("TWILIO_ACCESS_TOKEN", "TWILIO_ACCESS_TOKEN")}\"")
-        buildConfigField("String",
-                "TWILIO_ACCESS_TOKEN_SERVER",
-                "\"${getSecretProperty("TWILIO_ACCESS_TOKEN_SERVER", "http://localhost:3000")}\"")
-        buildConfigField("boolean",
-                "USE_TOKEN_SERVER",
-                "${getSecretProperty("USE_TOKEN_SERVER", false)}")
+        buildConfigField("boolean", "USE_TOKEN_SERVER", "${getSecretProperty("USE_TOKEN_SERVER", false)}")
     }
 
     compileOptions {
