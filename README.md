@@ -12,9 +12,9 @@ Twilio Video Quickstart for Android
 Step to use,
 - Import this project into the latest Android studio i.e. 'Electric Eel | 2022.1.1' and above
 - Generate an Access Token
--- View instructions here for how to generate an Access Token using the [Twilio CLI](https://www.twilio.com/docs/video/tutorials/user-identity-access-tokens#generate-cli). 
--- Generating Access Tokens with the Twilio CLI is a quick way to get an Access Token for testing and development purposes only. 
--- Need to generate access token for each phone/emulator. 
+  - View instructions here for how to generate an Access Token using the [Twilio CLI](https://www.twilio.com/docs/video/tutorials/user-identity-access-tokens#generate-cli).
+  - Generating Access Tokens with the Twilio CLI is a quick way to get an Access Token for testing and development purposes only.
+  - Need to generate access token for each phone/emulator.
 - Add the access token string copied from the console to a variable named 'phone1Token' & 'phone2Token' in your local.properties file.
 `phone1Token=abcde450123456789`
 `phone2Token=fghij691234563215`
